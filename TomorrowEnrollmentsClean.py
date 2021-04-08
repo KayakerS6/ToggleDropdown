@@ -22,15 +22,21 @@ driver.get("<Page that will be worked on>")  #Go to the page that will be worked
 time.sleep(1)  #Pause for a second
 
 x = 0
-while x < 12:  #Infinite loop to ensure all of the dropdowns get changed, the script ends on an error but every thing is correct
+while x < 12:  #Infinite loop to ensure all of the dropdowns get changed
     if x < 10:
         x += 1
-        drop = driver.find_element(By.XPATH, "//*[text()='Unknown']")  #find the element to change
-        drop.click()  #Click on it
-
-        attend = driver.find_element(By.XPATH, '//*[@id="changeCompletionStatus"]/div[2]')  #1=Unknown, 2=Attending, 3=No Show, 4=Complete; this marks everyone attending
-        attend.click()
+        try:
+            drop = driver.find_element(By.XPATH, "//*[text()='Unknown']")  #find the element to change
+            drop.click()  #Click on it
+            attend = driver.find_element(By.XPATH, '//*[@id="changeCompletionStatus"]/div[2]')  #1=Unknown, 2=Attending, 3=No Show, 4=Complete; this marks everyone attending
+            attend.click()
+        except:
+            x = 13  #exit the loop
     else:
         driver.refresh()  #Refresh the page to solve a website glitch
         x = 1  #reset the counter
         time.sleep(1)  #pause for page load
+
+driver.quit()  #Close the browswer
+time.sleep(1)
+exit()  #End the program
