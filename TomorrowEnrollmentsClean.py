@@ -5,24 +5,24 @@ import time
 import getpass
 
 Uname = input("What is your LMS login username:  ") #ask for the username
-Pword = getpass.getpass("What is your LMS login password:  ")  #ask for the password (getpass hides the keystrokes)
+Pword = getpass.getpass("What is your login password:  ")  #ask for the password (getpass hides the keystrokes)
 
 driver = webdriver.Chrome()
-driver.get("<Login Page>")  #Launches Chrome to the login page
+driver.get("""Login Page""")  #Launches Chrome to the login page
 
-inputUserName = driver.find_element_by_name("UserName")  #This may need to be changed
+inputUserName = driver.find_element_by_name("UserName")  #This may need to be changed for a different website
 inputUserName.send_keys(Uname)  #enter the username to the field on the webpage
-inputPassword = driver.find_element_by_name("Password")  #This may need to be changed
+inputPassword = driver.find_element_by_name("Password")  #This may need to be changed for a different website
 inputPassword.send_keys(Pword)  #enter the password to the field on the webpage
-signin = driver.find_element_by_id("login-submit")  #find the "Sign In" button
+signin = driver.find_element_by_id("login-submit")  #find the "Sign In" button.  This may need to be changed for a different website
 signin.click()  #"Click" the "Sign In" button
 
-driver.get("<Page that will be worked on>")  #Go to the page that will be worked on
+driver.get("""Page that will be worked on""")  #Go to the page that will be worked on
 
-time.sleep(1)  #Pause for a second
+time.sleep(1)  #Pause for a second and wait for the page to load
 
 x = 0
-while x < 12:  #Infinite loop to ensure all of the dropdowns get changed
+while x < 12:  #Loop to ensure all of the dropdowns get changed
     if x < 10:
         x += 1
         try:
